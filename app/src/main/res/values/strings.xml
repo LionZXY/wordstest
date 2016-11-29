@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Words Test</string>
+    <string name="courseId">Course # </string>
+
+    <string name="MyApp">MyApp</string>
+</resources>
