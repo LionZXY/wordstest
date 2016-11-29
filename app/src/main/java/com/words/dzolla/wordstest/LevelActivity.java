@@ -40,17 +40,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.survival_layout);
+
         getIntents(); //получаем нужные нам айдишники для запросов
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-5797256148176709/4735795871");
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
                 createRestartButton();
-//                beginPlayingGame();
             }
         });
 
@@ -84,6 +84,12 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         checkAnswer(v);
+    }
+
+    @Override
+    public void onBackPressed() {
+        countDownTimer.cancel();
+        super.onBackPressed();
     }
 
     public void startTimer(long time) {
@@ -174,7 +180,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkAnswer(View v) {
-        // Log.i(TAG, "SOME BuTTON CLICKED!");
         if (targetWords.get(correctWordArrIndex).getId() == v.getId()) {
             Log.i(TAG, "-- C O R R E C T --");
             playSound(R.raw.correct);
@@ -263,7 +268,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("SEE_YOUR_LOGCAT_TO_GET_YOUR_DEVICE_ID")
+                .addTestDevice("03F94E35A6A215F5B68C7ECA4D687F8E")
                 .build();
 
         mInterstitialAd.loadAd(adRequest);

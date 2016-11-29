@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
+
 /**
  * Created by eee on 16.11.2016.
  */
@@ -19,6 +23,7 @@ public class SelectOrCreateCourseActivity extends AppCompatActivity implements V
     public static final String TAG = "MyApp";
     Button createCourseButton;
     LinearLayout root_layout;
+    Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,17 @@ public class SelectOrCreateCourseActivity extends AppCompatActivity implements V
 
         showButtons();
 
+        // Получение экземпляра общедоступного счетчика.
+//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+//        mTracker = application.getDefaultTracker();
+
     }
+//    @Override
+//    public void onResume () {
+////        Log.i(TAG, "Присвоение названия экрану: " + "First screen");
+////        mTracker.setScreenName("Image~" + "First screen");
+////        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+//    }
 
     @Override
     public void onClick(View v) {
@@ -50,9 +65,9 @@ public class SelectOrCreateCourseActivity extends AppCompatActivity implements V
             DBHelper mDBHelper = new DBHelper(this);
             SQLiteDatabase db = mDBHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("_id", 3);
-            values.put("orig_lang_id", 3);
-            values.put("target_lang_id", 2);
+            values.put("_id", 1);
+            values.put("orig_lang_id", 2);
+            values.put("target_lang_id", 1);
             try {
                 db.insertOrThrow("courses", null, values);
             } catch (SQLException e) {

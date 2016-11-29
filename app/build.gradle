@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.google.android.gms:play-services:9.2.1'
+    compile 'com.google.android.gms:play-services-analytics:9.2.0'
 }
