@@ -34,17 +34,18 @@ public class SelectOrCreateCourseActivity extends AppCompatActivity implements V
 
         showButtons();
 
-        // Получение экземпляра общедоступного счетчика.
-//        AnalyticsApplication application = (AnalyticsApplication) getApplication();
-//        mTracker = application.getDefaultTracker();
+//         Получение экземпляра общедоступного счетчика.
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
     }
-//    @Override
-//    public void onResume () {
-////        Log.i(TAG, "Присвоение названия экрану: " + "First screen");
-////        mTracker.setScreenName("Image~" + "First screen");
-////        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-//    }
+    @Override
+    public void onResume () {
+        Log.i(TAG, "Присвоение названия экрану: " + "First screen");
+        mTracker.setScreenName("Image~" + "First screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
+    }
 
     @Override
     public void onClick(View v) {
