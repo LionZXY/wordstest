@@ -41,7 +41,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.survival_layout);
 
-        getIntents(); //получаем нужные нам айдишники для запросов
+        getIdsFromIntent(); //получаем нужные нам айдишники для запросов
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-5797256148176709/4735795871");
@@ -241,7 +241,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         return words;
     }
 
-    private void getIntents() {
+    private void getIdsFromIntent() {
         courseId = getIntent().getIntExtra("courseId", -1);
         origLangId = getIntent().getIntExtra("origLangId", -1);
         Log.i(TAG, "origLangId = " + origLangId);
