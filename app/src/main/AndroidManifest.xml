@@ -20,14 +20,16 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".SelectOrCreateCourseActivity">
+
+        </activity>
+        <activity android:name=".SurvivalActivity"></activity>
+        <activity android:name=".LevelListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SurvivalActivity"></activity>
-        <activity android:name=".LevelListActivity"></activity>
         <activity android:name=".LevelActivity"></activity>
         <activity android:name=".CampaignOrSurvivalActivity"></activity>
 

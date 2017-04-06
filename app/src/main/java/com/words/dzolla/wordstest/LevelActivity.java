@@ -32,9 +32,12 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     private long timeUntil;
     private int levelId, courseId, origLangId, targetLangId;
-    private static final int NUMBER_OF_WRONG_BUTTONS = 1;
+    private static final int NUMBER_OF_WRONG_BUTTONS = 2;
     private static final int INITIAL_TIME_MILLISECONDS = 6000;
     private static final int ADD_TIME_MILLISECONDS = 2000;
+
+    DBHelper mDBHelper;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         requestNewInterstitial();
 
         // выбрать из базы все слова, относящиеся к этому левелу, добавить их в список
-        DBHelper mDBHelper = new DBHelper(this);
-        SQLiteDatabase db = mDBHelper.getWritableDatabase();
+         mDBHelper = new DBHelper(this);
+         db = mDBHelper.getWritableDatabase();
 
         String[] origWordsColumns = getWordsColumns(origLangId);
         Cursor origWordsCursor = db.query("words", origWordsColumns, "words.level=" + levelId, null, null, null, null);
@@ -78,7 +81,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         showNewQ();
 
-        startTimer(INITIAL_TIME_MILLISECONDS);
+//        startTimer(INITIAL_TIME_MILLISECONDS);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        countDownTimer.cancel();
+//        countDownTimer.cancel();
         super.onBackPressed();
     }
 
@@ -141,8 +144,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         java.lang.String[] origWordsColumns = getWordsColumns(origLangId);
 
-        DBHelper mDBHelper = new DBHelper(this);
-        SQLiteDatabase db = mDBHelper.getWritableDatabase();
+//        DBHelper mDBHelper = new DBHelper(this);
+//        SQLiteDatabase db = mDBHelper.getWritableDatabase();
         Cursor origWordsCursor = db.query("words", origWordsColumns, "words.level=" + levelId, null, null, null, null);
         ArrayList<Word> tempOrigWords;
         Log.i(TAG, "temp_OrigWords:");
@@ -170,7 +173,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         Collections.shuffle(wordsForButtons);
 
-        for (int i = 0; i < NUMBER_OF_WRONG_BUTTONS + 1; i++) {
+        for (int i = 0; i <= NUMBER_OF_WRONG_BUTTONS ; i++) {
             Button bt = new Button(this);
             bt.setText(wordsForButtons.get(i).getWord());
             bt.setId(wordsForButtons.get(i).getId());
@@ -186,16 +189,16 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             answeredQuestions++;
             correctWordArrIndex++;
             Log.i(TAG, answeredQuestions + " questions answered");
-            countDownTimer.cancel();
+//            countDownTimer.cancel();
             long time = timeUntil + ADD_TIME_MILLISECONDS;
-            startTimer(time);
+//            startTimer(time);
 
             linear_layout.removeAllViews();
             if (answeredQuestions != origWords.size()) {
                 showNewQ();
             } else {
                 Log.i(TAG, "-- W I N ! --");
-                countDownTimer.cancel();
+//                countDownTimer.cancel();
                 textView.setText("YOU WIN!");
                 createRestartButton();
             }
@@ -205,7 +208,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             linear_layout.removeAllViews();
             textView.setText(targetWords.get(correctWordArrIndex).getWord() +
                     " = " + origWords.get((targetWords.get(correctWordArrIndex).getId())).getWord());
-            countDownTimer.cancel();
+//            countDownTimer.cancel();
             createRestartButton();
         }
     }

@@ -16,44 +16,52 @@ public class LevelListActivity extends AppCompatActivity implements View.OnClick
     int courseId, origLangId, targetLangId;
     LinearLayout ll_levels;
 
+    DBHelper mDBHelper;
+    SQLiteDatabase mDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_list_layout);
         Log.i(TAG, "Activity launched");
 
-        courseId = getIntent().getIntExtra("courseId", -1);
-        origLangId = getIntent().getIntExtra("origLangId", -1);
-        targetLangId = getIntent().getIntExtra("targetLangId", -1);
+//        courseId = getIntent().getIntExtra("courseId", -1);
+//        origLangId = getIntent().getIntExtra("origLangId", -1);
+//        targetLangId = getIntent().getIntExtra("targetLangId", -1);
 
-       showLevels();
+        courseId = 1;
+        origLangId = 1;
+        targetLangId = 2;
+
+        mDBHelper = new DBHelper(this);
+        mDB = mDBHelper.getWritableDatabase();
+
+        showLevels();
 
     }
 
     @Override
     public void onClick(View v) {
 
-        int levelId =(int)v.getTag();
+        int levelId = (int) v.getTag();
         Intent intent = new Intent(this, LevelActivity.class);
         intent.putExtra("levelId", levelId);
         intent.putExtra("targetLangId", targetLangId);
         intent.putExtra("origLangId", origLangId);
         startActivity(intent);
+    }
 
 
-        }
-
-
-   private void showLevels() {
+    private void showLevels() {
         ll_levels = (LinearLayout) findViewById(R.id.ll_levels);
-        DBHelper mDBHelper = new DBHelper(this);
-        SQLiteDatabase db = mDBHelper.getWritableDatabase();
+//        mDBHelper = new DBHelper(this);
+//        mDB = mDBHelper.getWritableDatabase();
 
         mDBHelper.showTableInLog("levels");
 
         //получаем уровни
         String[] lvlColumns = new String[2];
-        lvlColumns[0]="_id";
+        lvlColumns[0] = "_id";
 
         if (origLangId == 1) {
             lvlColumns[1] = "en_name";
@@ -63,7 +71,7 @@ public class LevelListActivity extends AppCompatActivity implements View.OnClick
             lvlColumns[1] = "de_name";
         }
 
-        Cursor curLevels = db.query("levels", lvlColumns, null, null, null, null, null);
+        Cursor curLevels = mDB.query("levels", lvlColumns, null, null, null, null, null);
         if (curLevels.moveToFirst()) {
             do {
 //

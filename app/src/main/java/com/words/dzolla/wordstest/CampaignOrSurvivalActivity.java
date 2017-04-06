@@ -43,9 +43,9 @@ public class CampaignOrSurvivalActivity extends AppCompatActivity implements Vie
         }
 
         mDBHelper.showTableInLog( "words" );
-//        DBHelper.showTableInLog("levels", db);
-//        DBHelper.showTableInLog("languages", db);
-//        DBHelper.showTableInLog("courses", db);
+//        DBHelper.showTableInLog("levels", mDB);
+//        DBHelper.showTableInLog("languages", mDB);
+//        DBHelper.showTableInLog("courses", mDB);
 
         Button btn1 = (Button) findViewById(R.id.survival);
         btn1.setOnClickListener(this);

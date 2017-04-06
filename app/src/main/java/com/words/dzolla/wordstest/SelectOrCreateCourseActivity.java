@@ -66,9 +66,9 @@ public class SelectOrCreateCourseActivity extends AppCompatActivity implements V
             DBHelper mDBHelper = new DBHelper(this);
             SQLiteDatabase db = mDBHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("_id", 1);
+            values.put("_id", 2);
             values.put("orig_lang_id", 2);
-            values.put("target_lang_id", 1);
+            values.put("target_lang_id", 2);
             try {
                 db.insertOrThrow("courses", null, values);
             } catch (SQLException e) {
